@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
                 title = API.title,
                 version = API.version,
                 contact = @Contact(
-                        name = "Utkarsh Vijay", email = "vijayutkarsh99@gmail.com", url = "https://www.linkedin.com/in/utkarshvijay9"
+                        name = "Utkarsh Vijay", email = "vijayutkarsh99@gmail.com", url = "https://www.linkedin.com/in/utkarshvijay9", github = ""
                 ),
                 description = API.description
         )
