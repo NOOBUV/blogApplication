@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
                 title = API.title,
                 version = API.version,
                 contact = @Contact(
-                        name = "Github Code", email = "vijayutkarsh99@gmail.com", url = "https://github.com/NOOBUV/blogApplication/tree/master"              ),
+                        name = "Github Code", url = "https://github.com/NOOBUV/blogApplication/tree/master"              ),
                 description = API.description
         )
 )
