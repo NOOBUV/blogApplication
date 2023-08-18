@@ -5,6 +5,7 @@ import com.app.blog.payloads.Dto.PostDto;
 import com.app.blog.payloads.PostResponse;
 import com.app.blog.services.FileService;
 import com.app.blog.services.PostService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,12 +34,16 @@ public class PostController {
     private String path;
 
 //    create
+    @Operation(summary = "Create a new post",
+        description = "Create a new post associated with a user and a category.")
     @PostMapping("/user/{userId}/category/{categoryId}/posts")
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto, @PathVariable Integer userId, @PathVariable Integer categoryId) {
         PostDto newPost = this.postService.createPost(postDto,userId,categoryId);
         return new ResponseEntity<PostDto>(newPost, HttpStatus.CREATED);
     }
 //    get by user
+    @Operation(summary = "Get posts by user",
+        description = "Retrieve posts authored by a specific user.")
     @GetMapping("/user/{userId}/posts")
     public ResponseEntity<PostResponse> getPostsByUser(@PathVariable Integer userId,
                                                        @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
@@ -49,6 +54,8 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 //    get by category
+    @Operation(summary = "Get posts by category",
+        description = "Retrieve posts belonging to a specific category.")
     @GetMapping("/category/{categoryId}/posts")
     public ResponseEntity<PostResponse> getPostsByCategory(@PathVariable Integer categoryId,
                                                            @RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
@@ -60,6 +67,7 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 //    get all posts
+    @Operation(summary = "Get all posts", description = "Retrieve all posts.")
     @GetMapping("/posts")
     public ResponseEntity<PostResponse> getAllPosts(
             @RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
@@ -71,6 +79,7 @@ public class PostController {
         return ResponseEntity.ok(postResponse);
     }
 //    get posts by keyword
+    @Operation(summary = "find post", description = "search post with title")
     @GetMapping("/posts/search/{keywords}")
     public ResponseEntity<PostResponse> searchPostByTitle(@PathVariable("keywords") String keywords,
                                                            @RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
@@ -81,6 +90,7 @@ public class PostController {
         return ResponseEntity.ok(postResponse);
     }
 //    get by id
+    @Operation(summary = "Get post by id")
     @GetMapping("/posts/{postId}")
     public ResponseEntity<PostDto> getPostById(@PathVariable Integer postId) {
         PostDto post = this.postService.getPostById(postId);
@@ -88,18 +98,21 @@ public class PostController {
     }
 
 //    delete post
+    @Operation(summary = "Delete post")
     @DeleteMapping("/posts/{postId}")
     public ResponseEntity<ApiResponse> deletePost(@PathVariable Integer postId) {
         this.postService.deletePost(postId);
         return ResponseEntity.ok(new ApiResponse("post deleted successfully",true));
     }
 //    update post
+    @Operation(summary = "Update post")
     @PutMapping("/posts/{postId}")
     public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto,@PathVariable Integer postId) {
         PostDto updatePost = this.postService.updatePost(postDto,postId);
         return ResponseEntity.ok(updatePost);
     }
 //    upload image
+    @Operation(summary = "Upload image",description = "upload image to a post")
     @PostMapping("/post/image/upload/{postId}")
     public ResponseEntity<PostDto> uploadPostImage(@RequestParam("image")MultipartFile image,
                                                          @PathVariable Integer postId) throws IOException {
@@ -110,6 +123,7 @@ public class PostController {
         return ResponseEntity.ok(updatePost);
     }
 //    method to serve files
+    @Operation(summary = "see image",description = "see image using imageName")
     @GetMapping(value = "/post/image/{imageName}",produces = MediaType.IMAGE_JPEG_VALUE)
     public void downloadImage(
             @PathVariable("imageName") String imageName,
