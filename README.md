@@ -59,7 +59,7 @@ The project follows a layered architecture, which promotes separation of concern
 
 To run the project locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/BlogApp.git`
+1. Clone the repository: `git clone https://github.com/NOOBUV/blogApplication.git`
 2. Configure the database connection settings in `application.properties`.
 3. Build and run the project: `mvn spring-boot:run`
 
