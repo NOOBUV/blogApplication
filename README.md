@@ -1,4 +1,4 @@
-# Blog Application Project
+# [Blog Application Project](http://blog-env.eba-7p65hzx5.ap-south-1.elasticbeanstalk.com/swagger-ui/index.html)
 A Basic Blog Application made using spring boot and mysql let's you:<br><ul>
 <li> role based security (admin and normal)</li>
 <li> create/delete/update post categories</li>
